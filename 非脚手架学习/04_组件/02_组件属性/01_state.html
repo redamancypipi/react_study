@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="test">
+
+    </div>
+    <!-- 引入 react核心库 -->
+    <script src="../../js/react.development.js"></script>
+    <!-- 引入 react-dom，用于支持react操作dom -->
+    <script src="../../js/react-dom.development.js"></script>
+    <!-- 引入 Babel，用于将 jsx转换成 js -->
+    <script src="../../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        // 创建类式组件
+        class Weather extends React.Component {
+            // 构造器调用一次
+            constructor(props){
+                super(props)
+                // 初始化状态
+                this.state = {
+                    isHot: true
+                }
+                // 解决 changeWeather 中this指向问题
+                this.changeWeather = this.changeWeather.bind(this)
+            }
+            changeWeather() {
+                // changeWeather放在 Weather的原型对象上，供实例使用
+            // 用于 changeWeather 作为 onclick的回调，所以不是通过实例调用的，是直接调用
+            // 类中的方法默认开启了局部严格模式，所以 changeWeather中的this为undefined
+                // console.log('标题被点击了');
+                // console.log(this);
+                // 状态(state)不可直接更改，需要借助内置API: this.setState() 进行更新
+                // this.state.isHot = !this.state.isHot // 这是错误写法
+                this.setState({isHot: !this.state.isHot})
+            }
+            render(){
+                // render调用 1+n 次，1是初始化， n是更新调用的次数
+                console.log(this);
+                return <h2 onClick={this.changeWeather}>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h2>
+            }
+        }
+        // 渲染虚拟ODM到页面
+        ReactDOM.render(<Weather/>, document.getElementById('test'))// ReactDOM.render(虚拟DOM，容器)
+
+        
+    </script>
+</body>
+
+</html>

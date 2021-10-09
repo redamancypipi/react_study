@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="test">
+
+    </div>
+    <!-- 引入 react核心库 -->
+    <script src="../../js/react.development.js"></script>
+    <!-- 引入 react-dom，用于支持react操作dom -->
+    <script src="../../js/react-dom.development.js"></script>
+    <!-- 引入 Babel，用于将 jsx转换成 js -->
+    <script src="../../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        // 创建类式组件
+        class Weather extends React.Component {
+            // 初始化状态
+            state = {
+                isHot: true
+            }
+            // 自定义方法：要用赋值语句的形式和箭头函数
+            changeWeather = () => {
+                this.setState({isHot: !this.state.isHot})
+            }
+            render(){
+                return <h2 onClick={this.changeWeather}>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h2>
+            }
+        }
+        // 渲染虚拟ODM到页面
+        ReactDOM.render(<Weather/>, document.getElementById('test'))// ReactDOM.render(虚拟DOM，容器)
+
+        
+    </script>
+</body>
+
+</html>
