@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello_react</title>
+</head>
+<body>
+    <!-- 准备一个容器 -->
+    <div id="test">
+
+    </div>
+    <!-- 引入 react核心库 -->
+    <script src="../js/react.development.js"></script>
+    <!-- 引入 react-dom，用于支持react操作dom -->
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 引入 Babel，用于将 jsx转换成 js -->
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">/* 此处一定要写 babel*/
+    /*
+    注意区分【js语句（代码）】与【js表达式】
+        1、表达式：一个表达式会产生一个值，可以放在任何一个需要值的地方
+            下面这些都是表达式：
+                a
+                a+b
+                demo(1) 函数返回值或undefined
+                arr.map()
+                function test(){} 会返回函数本身
+        2、语句（代码）：
+            下面这写都是语句（代码）：
+                if(){}
+                for(){}
+                switch(){case:xxx}
+    */
+        // 创建数据
+        const data = ['angular', 'react', 'vue']
+        // 创建虚拟DOM
+        const VDOM = (
+            <div>
+                <h1>前端框架列表</h1>
+                <ul>
+                    {
+                        data.map((item, index) => {
+                            return <li key={index}>{item}</li>
+                        }) 
+                    }   
+                </ul>
+            </div>
+        ) /* 此处不能写引号，因为不是字符串*/
+        // 渲染虚拟ODM到页面
+        ReactDOM.render(VDOM, document.getElementById('test'))/* ReactDOM.render(虚拟DOM，容器)*/
+    </script>
+</body>
+</html>
