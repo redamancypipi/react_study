@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="test">
+
+    </div>
+    <!-- 引入 react核心库 -->
+    <script src="../../../js/react.development.js"></script>
+    <!-- 引入 react-dom，用于支持react操作dom -->
+    <script src="../../../js/react-dom.development.js"></script>
+    <!-- 引入 Babel，用于将 jsx转换成 js -->
+    <script src="../../../js/babel.min.js"></script>
+    <!-- 引入prop-types，用于对组件标签属性进行限制 -->
+    <script src="../../../js/prop-types.js"></script>
+    <script type="text/babel">
+    // 函数式组件只能使用props
+        function Person(props) {
+            const {name, age, sex} = props
+            return (
+                <ul>
+                    <li>姓名：{name}</li>    
+                    <li>性别：{sex}</li>    
+                    <li>年龄：{age}</li>    
+                </ul>
+            )
+        }
+        Person.propTypes = {
+            name: PropTypes.string.isRequired, // 必须的字符串类型
+            age: PropTypes.number,
+            sex: PropTypes.string,
+            speak: PropTypes.func // 限制 speak为函数类型
+        }
+        Person.defaultProps = {
+            sex: '用户没有定义',
+            age: 18 // 默认值
+        }
+        // 渲染虚拟ODM到页面
+        ReactDOM.render(<Person name="小明"/>, document.getElementById('test'))// ReactDOM.render(虚拟DOM，容器)
+    </script>
+</body>
+
+</html>

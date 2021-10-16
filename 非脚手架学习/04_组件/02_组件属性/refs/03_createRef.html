@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="test">
+
+    </div>
+    <!-- 引入 react核心库 -->
+    <script src="../../../js/react.development.js"></script>
+    <!-- 引入 react-dom，用于支持react操作dom -->
+    <script src="../../../js/react-dom.development.js"></script>
+    <!-- 引入 Babel，用于将 jsx转换成 js -->
+    <script src="../../../js/babel.min.js"></script>
+    <!-- 引入prop-types，用于对组件标签属性进行限制 -->
+    <script src="../../../js/prop-types.js"></script>
+    <script type="text/babel">
+        class Demo extends React.Component {
+            myRef = React.createRef()
+            myRef2 = React.createRef()
+            showData = () => {
+                alert(this.myRef.current.value)
+            }
+            showData2 = () => {
+                alert(this.myRef2.current.value)
+            }
+            render(){
+                return (
+                    <div>
+                        <input ref={this.myRef} type="text" placehoder="点击按钮提示数据" />    
+                        <button onClick={this.showData}>点我提示左侧数据</button>
+                        <input onBlur={this.showData2} ref={this.myRef2} type="text" placehoder="失去焦点提示数据" />    
+                    </div>
+                )
+            }
+        }
+        // 渲染虚拟ODM到页面
+        ReactDOM.render(<Demo/>, document.getElementById('test'))// ReactDOM.render(虚拟DOM，容器)
+    </script>
+</body>
+
+</html>
